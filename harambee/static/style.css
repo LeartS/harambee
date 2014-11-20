@@ -1,0 +1,10 @@
+body {
+    font-size: 1.5em;
+    font-color: #121212;
+}
+
+#container {
+    width: 80%;
+    margin: auto;
+    line-width: 1.5px;
+}
