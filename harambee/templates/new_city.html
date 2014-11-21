@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block body %}
+  <h1>Add your city!</h1>
+  <form action="/city/new" method="post">
+    <input type="text" len="40" name="name"/>
+    <input type="number" len="5" name="cap"/>
+    <input type="submit" value="Create"/>
+  </form>
+{% endblock %}
