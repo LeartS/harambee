@@ -1,4 +1,4 @@
-SQLALCHEMY_DATABASE_URI = 'postgresql://learts:@localhost/harambee'
+SQLALCHEMY_DATABASE_URI = 'postgresql:///harambee'
 
 # Debug options
 SQLALCHEMY_ECHO = True
