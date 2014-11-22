@@ -1,7 +1,8 @@
 from flask import render_template
 from flask import request
 from flask import redirect, url_for
-from harambee import app
+from flask import flash
+from harambee import app, db
 from harambee.models import City
 
 @app.route("/")
@@ -21,6 +22,9 @@ def new_city():
         print(request.form)
         print(request.args)
         new_city = City(name=request.form['name'], cap=request.form['cap'])
+        db.session.add(new_city)
+        db.session.commit()
+        flash('City created correctly', category='success')
         return redirect(url_for('city', city=new_city))
 
 @app.route("/bug")

@@ -1,12 +1,26 @@
 <html>
   <head>
     <title>Harambee</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
-    <div id="container">
+    <div id="container" class="container">
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+          <div id="notices">
+            {% for category, message in messages %}
+              <div class="alert alert-{{category}}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
       {% block body %}
       {% endblock %}
     </div>
+    <footer class="footer">
+      Made with love by LeartS | A Glaucus Project
+    </footer>
   </body>
 </html>

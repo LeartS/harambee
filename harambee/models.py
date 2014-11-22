@@ -1,7 +1,4 @@
-from flask.ext.sqlalchemy import SQLAlchemy
-from harambee import app
-
-db = SQLAlchemy(app)
+from harambee import app, db
 
 class City(db.Model):
     id = db.Column(db.Integer, primary_key=True)
