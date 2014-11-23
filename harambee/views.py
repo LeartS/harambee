@@ -9,8 +9,9 @@ from harambee.models import City
 def index():
     return render_template('index.html')
 
+@app.route("/city/<int:city_id>/")
 @app.route("/city/<int:city_id>/<string:city>")
-def city(city_id, city):
+def city(city_id, city=None):
     city = City.query.filter(City.id == city_id).first()
     return render_template('city.html', city=city)
 

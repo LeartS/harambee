@@ -25,6 +25,10 @@ body {
     padding-right: 100px;
 }
 
+.city-detail {
+    margin-bottom: 20px;
+}
+
 #container {
     width: 80%;
     margin: auto;
