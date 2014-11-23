@@ -9,9 +9,9 @@ from harambee.models import City
 def index():
     return render_template('index.html')
 
-@app.route("/city/<string:city>")
-def city(city):
-    city = City.query.filter(City.name == city).first()
+@app.route("/city/<int:city_id>/<string:city>")
+def city(city_id, city):
+    city = City.query.filter(City.id == city_id).first()
     return render_template('city.html', city=city)
 
 @app.route("/city/new", methods=['GET', 'POST'])
@@ -25,7 +25,7 @@ def new_city():
         db.session.add(new_city)
         db.session.commit()
         flash('City created correctly', category='success')
-        return redirect(url_for('city', city=new_city))
+        return redirect(url_for('city', city_id=new_city.id, city=new_city))
 
 @app.route("/bug")
 def bug():
