@@ -29,7 +29,35 @@ body {
     margin-bottom: 20px;
 }
 
+.nav-stacked .badge {
+    float: right;
+}
+
+.list-group-item.collapsed > h2.bug-title {
+    font-size: 1.0em;
+    font-weight: normal;
+    display: inline;
+}
+
+.list-group-item.collapsed > .bug-details {
+    display: none;
+}
+
+h2.bug-title {
+    margin-top: 5px;
+    width: 100%;
+}
+
+h2.bug-title > .badge {
+    float: right;
+}
+
+h2.bug-title > .badge + .badge {
+  margin-right: 5px;
+}
+
 #container {
     width: 80%;
+    min-width: 400px;
     margin: auto;
 }
