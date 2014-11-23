@@ -20,8 +20,6 @@ def new_city():
     if request.method == 'GET':
         return render_template('new_city.html')
     else:
-        print(request.form)
-        print(request.args)
         new_city = City(name=request.form['name'], cap=request.form['cap'])
         db.session.add(new_city)
         db.session.commit()
