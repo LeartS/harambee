@@ -4,29 +4,41 @@
 <div class="jumbotron">
   <h1>Welcome to Harambee!</h1>
   <p>
-    Benvenuto su Harambee, una piattaforma dedicata al miglioramento dei luoghi in cui vivi.<br>
-    Per cominciare, cerca il tuo comune:
-    <input id="city" class="typeahead">
-    <script>      
-      window.onload = function() {
-          var citynames = ['Arsago', 'Casorate', 'Somma Lombardo'];
-          /*var cities = new Bloodhound({
-              datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-              queryTokenizer: Bloodhound.tokenizers.whitespace,
-              local: $.map(citynames, function(state) { return {value: state}; })
-          });
-          cities.initialize();*/
-          $('#city').typeahead();
-          /*{
-              hint: true,
-              highlight: true,
-          } {
-              name: 'Boh',
-              displayKey: 'value',
-              source: cities.ttAdapter()
-          });*/
-      }
-    </script>
+    Benvenuto su Harambee, una piattaforma dedicata al miglioramento dei luoghi in cui vivi.
   </p>
+  <br><br>
+  <p>Per cominciare, cerca il tuo comune:</p>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group input-group-lg">
+        <input id="city" class="typeahead input-large form-control" type="search">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.onload = function() {
+        var citynames = ['Arsago', 'Arezzo', 'Casorate', 'Somma Lombardo'];
+        var cities = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local: $.map(citynames, function(state) { return {value: state}; })
+        });
+        cities.initialize();
+        $('#city').typeahead({
+            hint: true,
+        }, {
+            name: 'cities',
+            displayKey: 'value',
+            source: cities.ttAdapter(),
+            templates: {
+                suggestion: function(data) { return data.value + ' -- 25 segnalazioni'; }
+            }
+        });
+        $('.tt-hint').addClass('form-control');
+    }
+  </script>
 </div>
 {% endblock %}
