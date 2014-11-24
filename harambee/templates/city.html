@@ -17,10 +17,9 @@
   di registrarsi ad Harambee!<br><br>
   <div class="container-fluid">
     <div class="row">
-    </div>
-    <div class="row">
       <div class="col-md-2 col-md-push-10">
         <ul class="nav nav-pills nav-stacked">
+          <li><a href="bug/new">Segnala un problema</a></li>
           <li role="presentation" class="active"><a href="#">Segnalazioni <span class="badge">200</span></a></li>
           <li role="presentation"><a href="#">Utenti <span class="badge">27</span></a></li>
           <li role="presentation"><a href="#">Messages</a></li>
@@ -28,22 +27,18 @@
       </div>
       <div class="col-md-10 col-md-pull-2">
         <ul class="list-group">
+          {% for bug in city.bugs %}
           <li class="list-group-item collapsed">
-            <h2 class="bug-title">Buca in via Roma <span class="badge">25 punti</span> <span class="badge">8 commenti</span></h2>
-            <div class="bug-details">Una buca stradale davvero profonda e pericolosa in Via Roma. CI sono state varie segnalazioni di persone
-            che dicono di aver danneggiato i propri veicoli a causa della buca.</div>
+            <h2 class="bug-title">
+              {{ bug.title }}
+              <span class="badge">25 punti</span>
+              <span class="badge">8 commenti</span>
+            </h2>
+            <div class="bug-details">
+              {{ bug.content }}
+            </div>
           </li>
-          <li class="list-group-item collapsed">
-            <h2 class="bug-title">Lampione non funzionante <span class="badge">21 punti</span> <span class="badge">16 commenti</span></h2>
-            <div class="bug-details">Il lampione di Via Torino funziona "al contrario": è acceso costantemente e si spegne quando qualcuno passa di lì.
-              Probabilmente il sensore è invertito.</div>
-          </li>
-          <li class="list-group-item collapsed">Rifiuti per strada <span class="badge">19 punti</span> </li>
-          <li class="list-group-item collapsed">Specchio girato male <span class="badge">19 punti</span> <span class="badge">2 commenti</span></li>
-          <li class="list-group-item collapsed">Erba troppo alta <span class="badge">18 punti</span> <span class="badge">16 commenti</span></li>
-          <li class="list-group-item collapsed">Strisce pedonali poco visibili <span class="badge">12 punti</span> <span class="badge">16 commenti</span></li>
-          <li class="list-group-item collapsed">Graffiti su muro scuola elementare <span class="badge">9 punti</span> </li>
-          <li class="list-group-item collapsed">Graffiti in stazione <span class="badge">8 punti</span> </li>
+          {% endfor %}
         </ul>
       </div>
     </div>

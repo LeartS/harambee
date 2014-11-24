@@ -3,7 +3,7 @@ from flask import request
 from flask import redirect, url_for
 from flask import flash
 from harambee import app, db
-from harambee.models import City
+from harambee.models import City, Bug
 
 @app.route("/")
 def index():
@@ -26,6 +26,23 @@ def new_city():
         flash('City created correctly', category='success')
         return redirect(url_for('city', city_id=new_city.id, city=new_city))
 
-@app.route("/bug")
-def bug():
-    return render_template('bug.html')
+@app.route("/bug/new", methods=['GET', 'POST'])
+def new_bug():
+    if request.method == 'GET':
+        return render_template('new_bug.html')
+    else:
+        new_bug = Bug(
+            title=request.form['title'],
+            content=request.form['content'],
+            city_id=request.form['city'],
+        )
+        db.session.add(new_bug)
+        db.session.commit()
+        flash('Bug created correctly', category='success')
+        return redirect(url_for('bug'))
+
+@app.route("/bug/<int:bug_id>")
+@app.route("/bug/<int:bug_id>/<string:title>")
+def bug(bug_id, title=None):
+    bug = Bug.query.filter(Bug.id == bug_id).first()
+    return render_template('bug.html', bug=bug)

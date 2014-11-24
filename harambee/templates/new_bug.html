@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block body %}
+  <h1>Segnala!</h1>
+  <form action="/bug/new" method="post">
+    <label for="title">Title</label> <input type="text"  name="title"/><br>
+    <label for="title">Content</label><br>
+    <textarea type="text" cols="90" rows="20" name="content"></textarea><br>
+    <input type="number" invisible="true" value="3" name="city"/><br>
+    <input type="submit" value="Create"/>
+  </form>
+{% endblock %}
