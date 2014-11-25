@@ -1,11 +1,16 @@
 {% extends 'layout.html' %}
 {% block body %}
-  <h1>Segnala!</h1>
-  <form action="/bug/new" method="post">
-    <label for="title">Title</label> <input type="text"  name="title"/><br>
-    <label for="title">Content</label><br>
-    <textarea type="text" cols="90" rows="20" name="content"></textarea><br>
-    <input type="number" invisible="true" value="3" name="city"/><br>
-    <input type="submit" value="Create"/>
+  <div class="page-header"><h1>Segnala un problema</h1></div>
+  <form action="{{ url_for('new_bug', city_id=city_id) }}" method="post">
+    <div class="form-group">
+      {{ form.title.label }}:
+      {{ form.title(class_="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.description.label }}:
+      {{ form.description(class_="form-control", rows="8") }}
+    </div>
+    {{ form.hidden_tag() }}
+    <button type="submit" class="btn btn-primary">Crea!</button>
   </form>
 {% endblock %}

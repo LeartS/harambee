@@ -6,3 +6,4 @@ db = SQLAlchemy(app)
 app.config.from_object('config')
 
 import harambee.views
+import harambee.forms
