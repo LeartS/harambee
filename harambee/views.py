@@ -31,10 +31,8 @@ def new_city():
 @app.route("/data/cities/preview")
 def cities_preview():
     cities = City.query.all()
-    a = list(c.serialize_preview() for c in cities)
-    print(a)
-    print(type(a[0]['name']))
-    return jsonify({'objects': cities})
+    cities = list(c.serialize_preview() for c in cities)
+    return jsonify(cities=cities)
 
 @app.route("/city/<int:city_id>/bug/new", methods=['GET', 'POST'])
 def new_bug(city_id):

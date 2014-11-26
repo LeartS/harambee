@@ -20,20 +20,23 @@
   </div>
   <script>
     window.onload = function() {
-        {% raw %} cityTemplate = Hogan.compile("<h3>{{value}}</h3> 25 segnalazioni, 18 contribuenti"); {% endraw %}
-        var citynames = ['Arsago', 'Arezzo', 'Casorate', 'Somma Lombardo'];
-        var cities = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        {% raw %} cityTemplate = Hogan.compile("<h3>{{name}}</h3> {{bug_count}} segnalazioni, 18 contribuenti"); {% endraw %}
+        var engine = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local: $.map(citynames, function(state) { return {value: state}; })
+            prefetch: {
+                url: '{{ url_for('cities_preview') }}',
+                filter: function(json) { return json.cities; },
+            }
         });
-        cities.initialize();
+        engine.clearPrefetchCache(); // for development
+        engine.initialize();
         $('#city').typeahead({
             hint: true,
         }, {
             name: 'cities',
-            displayKey: 'value',
-            source: cities.ttAdapter(),
+            displayKey: 'name',
+            source: engine.ttAdapter(),
             templates: {
                 suggestion: cityTemplate.render.bind(cityTemplate),
             }
