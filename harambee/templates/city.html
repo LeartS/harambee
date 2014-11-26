@@ -6,21 +6,34 @@
   </div>
   <div class="city-detail">
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-    5365 cittadini
+    <strong>5365</strong> cittadini
     <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-    200 segnalazioni
+    <strong>{{ city.bugs|count }}</strong> segnalazioni
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+    registrata <strong>14 Settembre 2014</strong>
   </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
   {{ city }} è un comune in Lombardia, Italia.<br>
   27 persone hanno contribuito a migliorare {{ city }}, effettuando 200 segnalazioni,
   89 commenti e 288 punti.<br>
   Non ci sono impiegati comunali registrati per {{ city }}, chiedi al tuo comune
-  di registrarsi ad Harambee!<br><br>
-  <div class="container-fluid">
-    <div class="row">
+  di registrarsi ad Harambee!<br>
+        Prova di testo molto lungo che mi serve per verificare che vada a capo
+        senza sforare nella colonna di destra, non dovrebbe essere difficile
+        e io credo che funzioni ma per sicurezza proviamo lo stesso dai<br>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-lg btn-primary">Segnala un problema</button>
+      </div>
+    </div>
+    <div id="city-lists" class="row">
       <div class="col-md-2 col-md-push-10">
         <ul class="nav nav-pills nav-stacked">
-          <li><a href="bug/new">Segnala un problema</a></li>
-          <li role="presentation" class="active"><a href="#">Segnalazioni <span class="badge">200</span></a></li>
+          <li role="presentation" class="active">
+            <a href="#">Segnalazioni <span class="badge">{{ city.bugs|count }}</span></a>
+          </li>
           <li role="presentation"><a href="#">Utenti <span class="badge">27</span></a></li>
           <li role="presentation"><a href="#">Messages</a></li>
         </ul>
@@ -39,6 +52,11 @@
             </div>
           </li>
           {% endfor %}
+          {% if city.bugs|count == 0 %}
+          <li class="list-group-item">
+            Non ci sono segnalazioni.
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
