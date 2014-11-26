@@ -2,6 +2,7 @@ from flask import render_template
 from flask import request
 from flask import redirect, url_for
 from flask import flash
+from flask import jsonify
 from harambee import app, db
 from harambee.models import City, Bug
 from harambee.forms import NewBugForm
@@ -26,6 +27,14 @@ def new_city():
         db.session.commit()
         flash('City created correctly', category='success')
         return redirect(url_for('city', city_id=new_city.id, city=new_city))
+
+@app.route("/data/cities/preview")
+def cities_preview():
+    cities = City.query.all()
+    a = list(c.serialize_preview() for c in cities)
+    print(a)
+    print(type(a[0]['name']))
+    return jsonify({'objects': cities})
 
 @app.route("/city/<int:city_id>/bug/new", methods=['GET', 'POST'])
 def new_bug(city_id):
