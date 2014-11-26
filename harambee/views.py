@@ -4,7 +4,7 @@ from flask import redirect, url_for
 from flask import flash
 from flask import jsonify
 from harambee import app, db
-from harambee.models import City, Bug
+from harambee.models import City, Bug, User
 from harambee.forms import NewBugForm
 
 @app.route("/")
@@ -15,7 +15,8 @@ def index():
 @app.route("/city/<int:city_id>/<string:city>")
 def city(city_id, city=None):
     city = City.query.filter(City.id == city_id).first()
-    return render_template('city.html', city=city)
+    users = User.query.all()
+    return render_template('city.html', city=city, users=users)
 
 @app.route("/city/new", methods=['GET', 'POST'])
 def new_city():

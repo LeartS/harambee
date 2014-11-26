@@ -2,7 +2,15 @@
 
 {% block body %}
   <div class="page-header">
-    <h1>{{ city }} <small>Lombardia, Italia</small></h1>
+    <h1>
+      {{ city }}
+      <small>
+        Lombardia, Italia
+        <span class="label label-info">New</span>
+        <span class="label label-success">Trending</span>
+        <span class="label label-danger">On Fire!</span>
+      </small>
+    </h1>
   </div>
   <div class="city-detail">
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -30,40 +38,63 @@
     </div>
     <div id="city-lists" class="row">
       <div class="col-md-2 col-md-push-10">
-        <ul class="nav nav-pills nav-stacked">
+        <ul id="citynav" class="nav nav-pills nav-stacked">
           <li role="presentation" class="active">
-            <a href="#">Segnalazioni <span class="badge">{{ city.bugs|count }}</span></a>
+            <a href="#bugs">Segnalazioni <span class="badge">{{ city.bugs|count }}</span></a>
           </li>
-          <li role="presentation"><a href="#">Utenti <span class="badge">27</span></a></li>
-          <li role="presentation"><a href="#">Messages</a></li>
+          <li role="presentation"><a href="#users">Utenti <span class="badge">27</span></a></li>
+          <li role="presentation"><a href="#messages">Messages</a></li>
         </ul>
       </div>
       <div class="col-md-10 col-md-pull-2">
-        <ul class="list-group">
-          {% for bug in city.bugs %}
-          <li class="list-group-item collapsed">
-            <h2 class="bug-title">
-              {{ bug.title }}
-              <span class="badge">25 punti</span>
-              <span class="badge">8 commenti</span>
-            </h2>
-            <div class="bug-details">
-              {{ bug.content }}
-            </div>
-          </li>
-          {% endfor %}
-          {% if city.bugs|count == 0 %}
-          <li class="list-group-item">
-            Non ci sono segnalazioni.
-          </li>
-          {% endif %}
-        </ul>
+        <div class="tab-content">
+          <div id="bugs" class="tab-pane fade active in">
+            <ul class="list-group">
+              {% for bug in city.bugs %}
+              <li class="list-group-item collapsed">
+                <h2 class="bug-title">
+                  {{ bug.title }}
+                  <span class="badge">25 punti</span>
+                  <span class="badge">8 commenti</span>
+                </h2>
+                <div class="bug-details">
+                  {{ bug.content }}
+                </div>
+              </li>
+              {% endfor %}
+              {% if city.bugs|count == 0 %}
+              <li class="list-group-item">
+                Non ci sono segnalazioni.
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div id="users" class="tab-pane fade">
+            <ul class="list-group">
+              {% for user in users %}
+              <li class="list-group-item">
+                {{ user.name }}
+                <span class="badge">8 segnalazioni</span>
+              </li>
+              {% endfor %}
+              {% if users|count == 0 %}
+              <li class="list-group-item">
+                Non ci sono utent.
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <script>
       window.onload = function() {
           $('li.list-group-item.collapsed').hover(function() {
-              $(this).toggleClass('collapsed', 1200);
+              $(this).toggleClass('collapsed');
+          });
+          $('#citynav a').click(function(e) {
+              e.preventDefault();
+              $(this).tab('show');
           });
       };
     </script>

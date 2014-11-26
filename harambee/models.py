@@ -21,10 +21,17 @@ class Bug(db.Model):
     content = db.Column(db.Text, nullable=False)
     address = db.Column(db.String(256), )
     city_id = db.Column(db.Integer, db.ForeignKey('city.id'), nullable=False)
+    reporter_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
     city = db.relationship('City', backref=db.backref('bugs'))
+    reporter = db.relationship('User', backref=db.backref('bugs'))
 
     def __init__(self, title, content, city_id, address=None):
         self.title = title
         self.content = content
         self.city_id = city_id
         self.address = address
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
