@@ -33,17 +33,24 @@
         e io credo che funzioni ma per sicurezza proviamo lo stesso dai<br>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-lg btn-primary">Segnala un problema</button>
+        <a href="{{ url_for('new_bug', city_id=city.id) }}">
+          <button class="btn btn-lg btn-primary">Segnala un problema</button>
+        </a>
       </div>
     </div>
     <div id="city-lists" class="row">
       <div class="col-md-2 col-md-push-10">
         <ul id="citynav" class="nav nav-pills nav-stacked">
           <li role="presentation" class="active">
-            <a href="#bugs">Segnalazioni <span class="badge">{{ city.bugs|count }}</span></a>
+            <a href="#bugs">
+              Segnalazioni <span class="badge">{{ city.bugs|count }}</span>
+            </a>
           </li>
-          <li role="presentation"><a href="#users">Utenti <span class="badge">27</span></a></li>
-          <li role="presentation"><a href="#messages">Messages</a></li>
+          <li role="presentation">
+            <a href="#users">
+              Utenti <span class="badge">{{ users|count }}</span>
+            </a>
+          </li>
         </ul>
       </div>
       <div class="col-md-10 col-md-pull-2">
@@ -74,6 +81,8 @@
               {% for user in users %}
               <li class="list-group-item">
                 {{ user.name }}
+                <span class="label label-danger">Top Reporter</span>
+                <span class="label label-info">Impiegato comunale</span>
                 <span class="badge">8 segnalazioni</span>
               </li>
               {% endfor %}
@@ -93,7 +102,6 @@
               $(this).toggleClass('collapsed');
           });
           $('#citynav a').click(function(e) {
-              e.preventDefault();
               $(this).tab('show');
           });
       };
