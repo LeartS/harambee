@@ -1,4 +1,5 @@
-from harambee import app
+from harambee import app, manager
 
-app.debug = True
-app.run()
+if __name__ == '__main__':
+    app.debug = True
+    manager.run()
