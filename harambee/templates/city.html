@@ -14,11 +14,11 @@
   </div>
   <div class="city-detail">
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-    <strong>5365</strong> cittadini
+    <strong>{{ city.population }}</strong> cittadini
     <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
     <strong>{{ city.bugs|count }}</strong> segnalazioni
     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-    registrata <strong>14 Settembre 2014</strong>
+    registrata <strong>{{ city.activation_date }}</strong>
   </div>
   <div class="container-fluid">
     <div class="row">
