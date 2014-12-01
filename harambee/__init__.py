@@ -12,5 +12,5 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-import harambee.views
-import harambee.forms
+from .controllers import *
+from .models import *
