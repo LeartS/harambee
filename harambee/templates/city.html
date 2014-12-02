@@ -23,11 +23,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-10">
-  {{ city }} è un comune in Lombardia, Italia.<br>
-  27 persone hanno contribuito a migliorare {{ city }}, effettuando 200 segnalazioni,
-  89 commenti e 288 punti.<br>
-  Non ci sono impiegati comunali registrati per {{ city }}, chiedi al tuo comune
-  di registrarsi ad Harambee!<br>
+        {{ city }} è un comune in Lombardia, Italia.<br>
+        {{ city.top_reporters|count }} persone hanno contribuito a migliorare {{ city }},
+        effettuando {{ city.bugs|count }} segnalazioni, 89 commenti e 288 punti.<br>
+        Non ci sono impiegati comunali registrati per {{ city }}, chiedi al tuo comune
+        di registrarsi ad Harambee!<br>
         Prova di testo molto lungo che mi serve per verificare che vada a capo
         senza sforare nella colonna di destra, non dovrebbe essere difficile
         e io credo che funzioni ma per sicurezza proviamo lo stesso dai<br>
@@ -48,7 +48,7 @@
           </li>
           <li role="presentation">
             <a href="#users">
-              Utenti <span class="badge">{{ users|count }}</span>
+              Utenti <span class="badge">{{ city.top_reporters|count }}</span>
             </a>
           </li>
         </ul>
@@ -78,17 +78,17 @@
           </div>
           <div id="users" class="tab-pane fade">
             <ul class="list-group">
-              {% for user in users %}
+              {% for user, n_reports in city.top_reporters %}
               <li class="list-group-item">
                 {{ user.name }}
                 <span class="label label-danger">Top Reporter</span>
                 <span class="label label-info">Impiegato comunale</span>
-                <span class="badge">8 segnalazioni</span>
+                <span class="badge">{{ n_reports }} segnalazioni</span>
               </li>
               {% endfor %}
-              {% if users|count == 0 %}
+              {% if city.top_reporters|count == 0 %}
               <li class="list-group-item">
-                Non ci sono utent.
+                Non ci sono utenti.
               </li>
               {% endif %}
             </ul>

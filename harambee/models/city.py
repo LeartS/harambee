@@ -17,6 +17,13 @@ class City(db.Model):
     def __repr__(self):
         return "{}".format(self.name)
 
+    @property
+    def top_reporters(self):
+        res = {}
+        for reporter in self.reporters:
+            res[reporter] = res.get(reporter, 0) + 1
+        return sorted(res.items(), key=lambda x: x[1], reverse=True)
+
     def serialize_preview(self):
         return {
             'id': int(self.id),
