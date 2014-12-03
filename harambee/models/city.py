@@ -29,4 +29,5 @@ class City(db.Model):
             'id': int(self.id),
             'name': str(self.name),
             'bug_count': len(self.bugs),
+            'reporters_count': len(self.top_reporters),
         }

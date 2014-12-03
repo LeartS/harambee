@@ -24,7 +24,7 @@
     window.onload = function() {
         {% raw %}
         cityTemplate = Hogan.compile(
-            "<h3>{{name}}</h3> {{bug_count}} segnalazioni, 18 contribuenti"
+            "<h3>{{name}}</h3> {{bug_count}} segnalazioni, {{reporters_count}} contribuenti"
         );
         emptyTemplate = Hogan.compile(
             "<div class=\"tt-suggestion\"><h3>Crea la tua città!</h3></div>"
