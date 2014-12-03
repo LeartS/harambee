@@ -5,6 +5,7 @@ from flask import flash
 
 from harambee import app, db
 from harambee.models import City, User
+from harambee.forms import NewCityForm
 
 
 @app.route("/city/<int:city_id>/")
@@ -16,11 +17,14 @@ def city(city_id, city=None):
 
 @app.route("/city/new", methods=['GET', 'POST'])
 def new_city():
-    if request.method == 'GET':
-        return render_template('new_city.html')
-    else:
-        new_city = City(name=request.form['name'], cap=request.form['cap'])
-        db.session.add(new_city)
-        db.session.commit()
-        flash('City created correctly', category='success')
-        return redirect(url_for('city', city_id=new_city.id, city=new_city))
+    city_form = NewCityForm()
+    if city_form.is_submitted():
+        if city_form.validate():
+            city = City(
+                name=city_form.name.data,
+                population=city_form.population.data
+            )
+            db.session.add(city)
+            db.session.commit()
+            return redirect(url_for('city', city_id=city.id))
+    return render_template('new_city.html', form=city_form)
