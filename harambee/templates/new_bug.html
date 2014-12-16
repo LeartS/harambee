@@ -1,9 +1,10 @@
 {% extends 'layout.html' %}
 {% block body %}
   <div class="page-header"><h1>Segnala un problema</h1></div>
-  <form action="{{ url_for('new_bug', city_id=city_id) }}" method="post">
+  <form action="{{ url_for('new_bug', city_id=city_id) }}" class="form-horizontal"
+        method="post">
     <div class="form-group">
-      {{ form.title.label }}:
+      {{ form.title.label(class_="control-label") }}
       {{ form.title(class_="form-control") }}
     </div>
     <div class="form-group">

@@ -46,20 +46,21 @@ body {
     margin-top: 10px;
 }
 
-.list-group-item.collapsed > h2.bug-title {
-    font-size: 1.0em;
-    font-weight: normal;
+.list-group-item > h2.bug-title {
+    font-size: 1.2em;
+    font-weight: bold;
     display: inline;
+    margin-bottom: 2px;
 }
 
-.list-group-item.collapsed > .bug-details {
-    display: none;
-}
+/* .list-group-item.collapse > .bug-details { */
+/*     display: none; */
+/* } */
 
-h2.bug-title {
-    margin-top: 5px;
-    width: 100%;
-}
+/* h2.bug-title { */
+/*     margin-top: 5px; */
+/*     width: 100%; */
+/* } */
 
 h2.bug-title > .badge {
     float: right;

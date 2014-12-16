@@ -57,15 +57,15 @@
         <div class="tab-content">
           <div id="bugs" class="tab-pane fade active in">
             <div class="list-group">
-              {% for bug in city.bugs %}
-              <a href="{{ url_for('bug', bug_id=bug.id) }}" class="list-group-item collapsed">
+              {% for bug in city.bugs|sort(attribute='id') %}
+              <a href="{{ url_for('bug', bug_id=bug.id) }}" class="list-group-item">
                 <h2 class="bug-title">
                   {{ bug.title }}
                   <span class="badge">25 punti</span>
                   <span class="badge">8 commenti</span>
                 </h2>
-                <div class="bug-details">
-                  {{ bug.content }}
+                <div id="bug{{ bug.id  }}" class="bug-details">
+                  {{ bug.content|truncate }}
                 </div>
               </a>
               {% endfor %}
@@ -98,9 +98,6 @@
     </div>
     <script>
       window.onload = function() {
-          $('a.list-group-item.collapsed').hover(function() {
-              $(this).toggleClass('collapsed');
-          });
           $('#citynav a').click(function(e) {
               $(this).tab('show');
           });
