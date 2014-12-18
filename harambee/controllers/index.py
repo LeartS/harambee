@@ -11,7 +11,6 @@ def index():
 
 @app.route('/search')
 def search():
-    print(repr(request.args['city']))
     if not request.args['city']:
         cities = City.query.limit(10).all()
     else:

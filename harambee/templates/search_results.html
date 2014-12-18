@@ -1,12 +1,21 @@
 {% extends "layout.html" %}
 
 {% block body %}
+  <div class="page-header">
+    <h1>
+      Search results
+    </h1>
+  </div>
   {% if cities|length %}
+    <div class="list-group">
     {% for city in cities %}
-      <div>
-        {{ city.name }}
-      </div>
+      <a href="{{ url_for('city', city_id=city.id, city=city.name) }}" class="list-group-item">
+        <h4>{{ city.name }} <small>Lombardia, Italia</small></h4>
+        {{ city.bugs|length }} segnalazioni,
+        {{ city.top_reporters|length }} reporters.
+      </a>
     {% endfor %}
+    </div>
   {% else %}
     <div class="alert alert-danger">
       We couldn't find any cities matching your search!

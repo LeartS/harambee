@@ -1,0 +1,6 @@
+Have fun with these:
+
+* Add UserBadge model and UserBadge-User link table (with date awarded)
+* Add CityBadge model and CityBadge-City link table (with date awarded)
+* Add user view, to show user data, bugs reported, badges etc
+* Complete bug view, add map, attached images, a real layout..
